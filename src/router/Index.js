@@ -41,7 +41,23 @@ const routes = [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: '/product/:slug',
+        name: 'detail_product',
+        component: () => import('../views/product/Show.vue'),
+    },
+    {
+        path: '/category/:slug',
+        name: 'detail_category',
+        component: () => import('../views/category/Show.vue')
+    },
+    {
+        path: '/sub-category/:slug',
+        name: 'detail_subcategory',
+        component: () => import('../views/category/subcategory/Show.vue')
     }
+    
 ]
 
 //create router

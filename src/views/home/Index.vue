@@ -2,34 +2,24 @@
     <!-- Category Top Start -->
     <Category/>
 
-    <!-- Featured Start -->
-    <Featured/>
+    <!-- Trandy Product -->
+    <TrandyProduct/>
 
-    <!-- Categories Body -->
-    <CategoryBody/>
-
-    <!-- Offer Start -->
-    <Offer/>
-
-    <!-- Trend Products Start -->
-    <TrendProduct/>
+    <!-- New Product -->
+    <NewProduct/>
 
 </template>
 
 <script>
     import Category from "../../components/Category.vue";
-    import Featured from "../../components/home/Featured.vue";
-    import CategoryBody from "../../components/home/CategoryBody.vue";
-    import Offer from "../../components/home/Offer.vue";
-    import TrendProduct from "../../components/home/TrendProduct.vue";
+    import TrandyProduct from "../../components/home/TrandyProduct.vue";
+    import NewProduct from "../../components/home/NewProduct.vue";
     export default{
         name: 'HomeComponent',
         components: {
             Category,
-            Featured,
-            CategoryBody,
-            Offer,
-            TrendProduct,
+            TrandyProduct,
+            NewProduct
         }
 
     }

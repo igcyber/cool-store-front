@@ -1,14 +1,15 @@
 <template>
-    <div class="container-fluid mb-5">
+    <!-- Navbar Start -->
+    <div class="container-fluid">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">Kategori Produk</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <!-- iterasi kategori -->
+                         <!-- iterasi kategori -->
                         <div v-for="category in categories" :key="category.id" class="nav-item">
                             <!-- jika memiliki subkategori -->
                             <div v-if="category.sub_categories.length > 0"  class="dropdown">
@@ -29,36 +30,50 @@
                     </div>
                 </nav>
             </div>
-            <!-- Slider Component -->
-            <Slider/>
+            <div class="col-lg-9">
+                <NavComponent/>
+            </div>
         </div>
     </div>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shop</p>
+            </div>
+        </div>
+    </div>
+<!-- Page Header End -->
 </template>
-
 <script>
-    import Slider from './Slider.vue';
-    import {computed, onMounted} from 'vue';
-    import {useStore} from 'vuex';
-    export default {
-        name: 'CategoryComponent',
-        components : {
-            Slider
-        },
-        setup(){
-            //store vuex
-            const store = useStore();
+import {computed, onMounted} from 'vue';
+import {useStore} from 'vuex';
+import NavComponent from "./Nav.vue";
+export default{
+    name: 'HeaderPageComponent',
+    components : {
+        NavComponent
+    },
+    setup(){
+        //store vuex
+        const store = useStore();
 
-            //panggil action getCategories dari module store category
-            onMounted(() => {
-                store.dispatch('category/getCategories');
-            })
+        //panggil action getCategories dari module store category
+        onMounted(() => {
+            store.dispatch('category/getCategories');
+        })
 
-            //simpan dan dapatkan data dari getCategories
-            const categories = computed( ()=> store.state.category.categories )
+        //simpan dan dapatkan data dari getCategories
+        const categories = computed( ()=> store.state.category.categories )
 
-            return {
-                categories,
-            }
+        return {
+            categories,
         }
     }
+}
 </script>

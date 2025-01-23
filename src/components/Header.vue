@@ -60,7 +60,15 @@
                 </a> -->
 
                 <div v-if="isLoggedIn">
-                    <button class="btn btn-sm btn-danger" @click="logout">
+                    <a href="" class="btn border">
+                        <i class="fas fa-heart text-primary"></i>
+                        <span class="badge">0</span>
+                    </a>
+                    <a href="" class="btn border ml-2">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <span class="badge">0</span>
+                    </a>
+                    <button class="btn btn-md btn-danger ml-2" @click="logout">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
                     </button>
