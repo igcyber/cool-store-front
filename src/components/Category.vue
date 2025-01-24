@@ -11,7 +11,7 @@
                         <!-- iterasi kategori -->
                         <div v-for="category in categories" :key="category.id" class="nav-item">
                             <!-- jika memiliki subkategori -->
-                            <div v-if="category.sub_categories.length > 0"  class="dropdown">
+                            <div v-if="category.sub_categories && category.sub_categories.length > 0" class="dropdown">
                                 <a class="nav-link" data-toggle="dropdown">
                                     {{ category.name }}
                                     <i class="fa fa-angle-down float-right mt-1"></i>

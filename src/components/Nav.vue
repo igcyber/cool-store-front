@@ -8,9 +8,12 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <router-link :to="{name: 'home'}" class="nav-item nav-link active">Beranda</router-link>
-                <a href="shop.html" class="nav-item nav-link">Kategori Produk</a>
-                <a href="detail.html" class="nav-item nav-link">Semua Produk</a>
+                <router-link :to="{ name: 'home' }" class="nav-item nav-link" active-class="active">Beranda</router-link>
+               
+                <router-link :to="{ name: 'category' }" class="nav-item nav-link" active-class="active">Kategori</router-link>
+
+                <a href="" class="nav-tiem nav-link">Produk</a>
+
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Transaksi</a>
                     <div class="dropdown-menu rounded-0 m-0">
@@ -19,10 +22,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="navbar-nav ml-auto py-0">
-                <a href="" class="nav-item nav-link">Login</a>
-                <a href="" class="nav-item nav-link">Register</a>
-            </div> -->
         </div>
     </nav>
 </template>

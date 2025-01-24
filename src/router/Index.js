@@ -48,6 +48,14 @@ const routes = [
         component: () => import('../views/product/Show.vue'),
     },
     {
+        path: '/category',
+        name: 'category',
+        component: () => import('../views/category/Index.vue'),
+        meta: {
+            title: 'Kategori'
+        }
+    },
+    {
         path: '/category/:slug',
         name: 'detail_category',
         component: () => import('../views/category/Show.vue')
