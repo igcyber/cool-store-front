@@ -23,8 +23,7 @@
 <!-- Page Header End -->
 </template>
 <script>
-import {computed, onMounted} from 'vue';
-import {useStore} from 'vuex';
+import {computed} from 'vue';
 import {useRoute} from 'vue-router';
 import NavComponent from "./Nav.vue";
 export default{
@@ -33,26 +32,30 @@ export default{
         NavComponent
     },
     setup(){
-        //store vuex
-        const store = useStore();
-
         //use route
         const route = useRoute();
+        
+        //slug dari url
+        const slug = route.params.slug;
 
-        //panggil action getCategories dari module store category
-        onMounted(() => {
-            store.dispatch('category/getCategories');
-        })
-
-        //simpan dan dapatkan data dari getCategories
-        const categories = computed( ()=> store.state.category.categories )
+        //title case slug
+        const formatSlug = (slug) => {
+            return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
 
         //simpan nama halaman dari route yang di akses
-        const titlePage = computed( ()=> route.meta.title || 'Halaman Tidak Dikenal')
+        const titlePage = computed( ()=> 
+        {
+            if(route.name == 'detail_category'){
+                return formatSlug(slug);
+            }else if(route.name == 'detail_subcategory'){
+                return formatSlug(slug);
+            }
+            return route.meta.title;
+        })
 
         return {
             route,
-            categories,
             titlePage
         }
     }

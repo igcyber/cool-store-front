@@ -8,9 +8,9 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-                <router-link :to="{ name: 'home' }" class="nav-item nav-link" active-class="active">Beranda</router-link>
+                <router-link :to="{ name: 'home' }" class="nav-item nav-link" active-class="active">Beranda </router-link>
                
-                <router-link :to="{ name: 'category' }" class="nav-item nav-link" active-class="active">Kategori</router-link>
+                <router-link :to="{ name: 'category' }" class="nav-item nav-link" :class="{ active: isCategoryActive }" >Kategori</router-link>
 
                 <a href="" class="nav-tiem nav-link">Produk</a>
 
@@ -26,7 +26,22 @@
     </nav>
 </template>
 <script>
+    import {computed} from 'vue';
+    import {useRoute} from 'vue-router';
     export default {
         name: 'NavComponent',
+        setup()
+        {
+            const route = useRoute();
+
+            //cek apakah user sedang mengakses path /category || /category/:slug || /sub-category/:slug
+            const isCategoryActive = computed(() => {
+                return route.name === 'category' || route.name === 'detail_category' || route.name === 'detail_subcategory'
+            })
+
+            return {
+                isCategoryActive
+            }
+        }
     }
 </script>

@@ -46,6 +46,9 @@ const routes = [
         path: '/product/:slug',
         name: 'detail_product',
         component: () => import('../views/product/Show.vue'),
+        meta: {
+            title: 'Detail Product' 
+        }
     },
     {
         path: '/category',
@@ -58,12 +61,12 @@ const routes = [
     {
         path: '/category/:slug',
         name: 'detail_category',
-        component: () => import('../views/category/Show.vue')
+        component: () => import('../views/category/Show.vue'),
     },
     {
         path: '/sub-category/:slug',
         name: 'detail_subcategory',
-        component: () => import('../views/category/subcategory/Show.vue')
+        component: () => import('../views/category/subcategory/Show.vue'),
     }
     
 ]

@@ -1,7 +1,7 @@
 <template>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
+        <!-- <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark" href="">FAQs</a>
@@ -30,11 +30,11 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <router-link :to="{name: 'home'}" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Cool</span>Shop</h1>
                 </router-link>
             </div>
             <div class="col-lg-6 col-6 text-left">
@@ -50,15 +50,6 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <!-- <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
-                </a>
-                <a href="" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
-                </a> -->
-
                 <div v-if="isLoggedIn">
                     <a href="" class="btn border">
                         <i class="fas fa-heart text-primary"></i>
