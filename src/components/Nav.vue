@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
                 <router-link :to="{ name: 'home' }" class="nav-item nav-link" active-class="active">Beranda </router-link>
-               
+                
                 <router-link :to="{ name: 'category' }" class="nav-item nav-link" :class="{ active: isCategoryActive }" >Kategori</router-link>
-
-                <a href="" class="nav-tiem nav-link">Produk</a>
+                
+                <router-link :to="{ name: 'product' }" class="nav-item nav-link" :class="{active: isProductActive }">Produk </router-link>
 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Transaksi</a>
@@ -39,8 +39,14 @@
                 return route.name === 'category' || route.name === 'detail_category' || route.name === 'detail_subcategory'
             })
 
+            //cek apakah user sedang mengakses path /product|| /product/:slug
+            const isProductActive = computed(() => {
+                return route.name === 'detail_product'
+            })
+
             return {
-                isCategoryActive
+                isCategoryActive,
+                isProductActive
             }
         }
     }

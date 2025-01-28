@@ -26,7 +26,7 @@
 import {computed} from 'vue';
 import {useRoute} from 'vue-router';
 import NavComponent from "./Nav.vue";
-export default{
+export default {
     name: 'HeaderPageComponent',
     components : {
         NavComponent
@@ -37,16 +37,18 @@ export default{
         
         //slug dari url
         const slug = route.params.slug;
-
+        
         //title case slug
         const formatSlug = (slug) => {
             return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
+        
+        // console.log(formatSlug(slug));
 
         //simpan nama halaman dari route yang di akses
         const titlePage = computed( ()=> 
         {
-            if(route.name == 'detail_category'){
+            if(route.name == 'detail_category' || route.name == 'detail_product'){
                 return formatSlug(slug);
             }else if(route.name == 'detail_subcategory'){
                 return formatSlug(slug);

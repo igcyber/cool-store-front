@@ -43,12 +43,17 @@ const routes = [
         }
     },
     {
+        path: '/product',
+        name: 'product',
+        component: () => import('../views/product/Index.vue'),
+        meta: {
+            title: 'Produk'
+        }
+    },
+    {
         path: '/product/:slug',
         name: 'detail_product',
         component: () => import('../views/product/Show.vue'),
-        meta: {
-            title: 'Detail Product' 
-        }
     },
     {
         path: '/category',
@@ -68,7 +73,6 @@ const routes = [
         name: 'detail_subcategory',
         component: () => import('../views/category/subcategory/Show.vue'),
     }
-    
 ]
 
 //create router

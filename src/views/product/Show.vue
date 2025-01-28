@@ -1,12 +1,18 @@
 <template>
-     <!-- Shop Detail Start -->
-     <div class="container-fluid py-5">
+    <HeaderPage/>
+    <!-- Shop Detail Start -->
+    <div class="container-fluid py-5">
         <div class="row px-xl-5">
             <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
+                        <!-- Gambar Utama -->
                         <div class="carousel-item active">
-                            <!-- <img class="w-100 h-100" src="img/product-1.jpg" alt="Image"> -->
+                            <img class="w-100 h-100" :src="product.image" alt="Gambar Utama Produk">
+                        </div>
+                        <!-- Gambar Tambahan -->
+                        <div class="carousel-item" v-for="img in product.product_images" :key="img.id">
+                            <img class="w-100 h-100" :src="img.image" alt="Gambar Tambahan">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -19,14 +25,26 @@
             </div>
 
             <div class="col-lg-7 pb-5">
+
                 <h3 class="font-weight-semi-bold">{{ product.title }}</h3>
-                <h3 class="font-weight-semi-bold mb-4">Rp. {{ moneyFormat(product.price) }}</h3>
+                <span v-if="product.discount > 0">
+                    <h3 class="ml-2">
+                        <s class="text-muted mr-2">Rp. {{ moneyFormat(product.price) }} </s>
+                        <span>Rp {{ moneyFormat(calcDiscount(product)) }}</span>
+                    </h3>
+                </span>
+                <span v-else>
+                    <h3 class="ml-2">Rp {{ moneyFormat(product.price) }}</h3>
+                </span>
+
                 <p class="mb-4" v-html="product.content"></p>
                 <div class="d-flex mb-3">
                     <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
-                    <div v-for="size in product.product_sizes" :key="size.id" class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" :id="'size-' + size.id" name="size">
-                        <label class="custom-control-label" :for="'size-' + size.id">{{ size.size }}</label>
+                    <div v-for="size in product?.product_sizes" :key="size.id" class="custom-control custom-radio custom-control-inline">
+                        <span v-if="product?.product_sizes && product.product_sizes.length > 0 "> 
+                            <input type="radio" class="custom-control-input" :id="'size-' + size.id" name="size">
+                            <label class="custom-control-label" :for="'size-' + size.id">{{ size.size }}</label>
+                        </span>
                     </div>
                 </div>
                 <div class="d-flex mb-4">
@@ -65,6 +83,9 @@
 
     export default {
         name: 'ProductDetailComponent',
+        components: {
+            HeaderPage
+        },
         setup() {
             //vue route
             const route = useRoute();
