@@ -39,7 +39,7 @@
 
                 <p class="mb-4" v-html="product.content"></p>
                 <div class="d-flex mb-3">
-                    <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
+                    <p class="text-dark font-weight-medium mb-0 mr-3">Ukuran :</p>
                     <div v-for="size in product?.product_sizes" :key="size.id" class="custom-control custom-radio custom-control-inline">
                         <span v-if="product?.product_sizes && product.product_sizes.length > 0 "> 
                             <input type="radio" class="custom-control-input" :id="'size-' + size.id" name="size">
@@ -48,14 +48,14 @@
                     </div>
                 </div>
                 <div class="d-flex mb-4">
-                    <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
+                    <p class="text-dark font-weight-medium mb-0 mr-3">Warna :</p>
                     <div v-for="color in product.product_images" :key="color.id" class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" :id="'color-' + color.color.id" name="color">
                         <label class="custom-control-label" :for="'color-' + color.color.id">{{ color.color.name }}</label>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
+                    <!-- <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-minus" >
                             <i class="fa fa-minus"></i>
@@ -67,8 +67,8 @@
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
-                    </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    </div> -->
+                    <button @click.prevent="addToCart(product.id, calcDiscount(product), product.weight)" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Masukkan Keranjang</button>
                 </div>
             </div>
         </div>
@@ -91,7 +91,6 @@
             const route = useRoute();
             //vue router
             const router = useRouter();
-
             //store vuex
             const store = useStore();
 
@@ -105,11 +104,30 @@
                 return store.state.product.product
             });
 
+            //function addToCart
+            function addToCart(product_id, price, weight){
+                //check token terlebih dahulu
+                const token = store.state.auth.token;
+                //jika tidak ada maka arahkan ke halaman login
+                if(!token) {
+                    return router.push({name: 'login'})
+                }
+                //panggil action addToCart dari module cart
+                store.dispatch('cart/addToCart', {
+                    product_id: product_id,
+                    price: price,
+                    weight: weight,
+                    qty: 1
+                })
+
+            }
+
             return {
                 route,
                 store,
                 router,
-                product
+                product,
+                addToCart
             }
         }
     }

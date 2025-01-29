@@ -5,6 +5,7 @@ import category from './module/Category';
 import slider from './module/Slider';
 import setting from './module/Setting';
 import product from './module/Product';
+import cart from './module/Cart';
 
 
 export default createStore({
@@ -14,6 +15,7 @@ export default createStore({
         category,
         slider,
         setting,
-        product
+        product,
+        cart
     }
 })

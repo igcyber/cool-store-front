@@ -6,6 +6,7 @@ const product = {
 
     //state
     state: {
+        //all products
         products: [],
 
         //detail single product
