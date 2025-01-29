@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-success btn-lg mb-1 rounded">
+                        <button type="submit" class="btn btn-md btn-success btn-lg mb-1 rounded">
                             <i class="fas fa-sign-in-alt"></i>
                             Login
                         </button>

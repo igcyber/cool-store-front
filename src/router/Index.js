@@ -72,6 +72,14 @@ const routes = [
         path: '/sub-category/:slug',
         name: 'detail_subcategory',
         component: () => import('../views/category/subcategory/Show.vue'),
+    },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('../views/cart/Index.vue'),
+        meta: {
+            requiresAuth: true
+        }
     }
 ]
 

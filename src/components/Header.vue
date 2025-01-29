@@ -37,7 +37,7 @@
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">Cool</span>Shop</h1>
                 </router-link>
             </div>
-            <div class="col-lg-6 col-6 text-left">
+            <div class="col-lg-5 col-5 text-left">
                 <form action="">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for products">
@@ -49,16 +49,16 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 col-6 text-right">
+            <div class="col-lg-4 col-7 text-right">
                 <div v-if="isLoggedIn">
-                    <a href="" class="btn border">
-                        <i class="fas fa-heart text-primary"></i>
-                        <span class="badge">0</span>
-                    </a>
-                    <a href="" class="btn border ml-2">
+                    <router-link :to="{name: 'cart'}" class="btn border ml-2">
                         <i class="fas fa-shopping-cart text-primary"></i>
-                        <span class="badge">0</span>
-                    </a>
+                        <span class="badge">{{ cartCount }} | Rp. {{ moneyFormat(cartTotal) }}</span>
+                    </router-link>
+                    <router-link :to="{name: 'dashboard'}" class="btn border ml-2">
+                        <i class="fa fa-tachometer-alt text-primary"></i>
+                        <span class="badge">Dashboard</span>
+                    </router-link>
                     <button class="btn btn-md btn-danger ml-2" @click="logout">
                         <i class="fas fa-sign-out-alt"></i>
                         Logout
@@ -79,17 +79,47 @@
 </template>
 
 <script>
-    import {mapGetters, useStore} from 'vuex';
+    import {useStore} from 'vuex';
+    import { onMounted, computed } from 'vue';
     import {useRouter} from 'vue-router';
     export default{
         name: 'HeaderComponent',
-        computed: {
-            ...mapGetters('auth', ['isLoggedIn'])
-        },
+        // computed: {
+        //     ...mapGetters('auth', ['isLoggedIn'])
+        // },
         setup(){
             const store = useStore();
-
             const router = useRouter();
+
+            //computed current logged in user
+            const isLoggedIn = computed(() => {
+                return store.getters['auth/isLoggedIn']
+            })
+
+            //computed amount of item in cart
+            const cartCount = computed(() => {
+                return store.getters['cart/cartCount']
+            })
+
+            const cartTotal = computed(() => {
+                return store.getters['cart/cartTotal']
+            })
+
+
+            onMounted(() => {
+                //check state token
+                const token = store.state.auth.token
+
+                if(!token){
+                    return
+                }
+
+                //saat mounted jalankan action cartCount di module cart
+                store.dispatch('cart/cartCount');
+
+                //saat mounted jalankan action cartTotal di module cart
+                store.dispatch('cart/cartTotal');
+            })
 
             function logout(){
                 //panggil action "logout" di dalam module "auth"
@@ -107,7 +137,10 @@
             return {
                 store,
                 router,
-                logout
+                logout,
+                isLoggedIn,
+                cartCount,
+                cartTotal
             }
         }
        

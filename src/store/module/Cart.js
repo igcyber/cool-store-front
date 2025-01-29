@@ -7,6 +7,8 @@ const cart = {
         cart: [],
         //total cart
         cartTotal: 0,
+        //cart weight
+        cartWeight: 0,
     },
     //mutations
     mutations: {
@@ -58,6 +60,87 @@ const cart = {
                     commit('TOTAL_CART', response.data.total)
                 })
             })
+        },
+        
+        //action cartCount
+        cartCount({commit}){
+            //get data token & user
+            const token = localStorage.getItem('token');
+
+            //set axios header dengan type Authorization + Bearer token
+            Api.defaults.headers.common['Authorization'] = "Bearer " + token;
+
+            //get data cart
+            Api.get('/carts')
+            .then(response => {
+                //commit mutation to GET_CART
+                commit('GET_CART', response.data.carts)
+            })
+        },
+
+        //action get total price
+        cartTotal({commit}){
+            //get data token & user
+            const token = localStorage.getItem('token');
+
+            //set axios header dengan type Authorization + Bearer token
+            Api.defaults.headers.common['Authorization'] = "Bearer " + token;
+
+            //get data total cart
+            Api.get('/cart/total-price')
+            .then(response => {
+                //commit mutation to TOTAL_CART
+                commit('TOTAL_CART', response.data.total)
+            })
+        },
+
+        //action get total weight
+        cartWeight({commit}){
+            //get data token & user
+            const token = localStorage.getItem('token');
+
+            //set axios header dengan type Authorization + Bearer token
+            Api.defaults.headers.common['Authorization'] = "Bearer " + token;
+
+            //get total weight
+            Api.get('/cart/total-weight')
+            .then(response => {
+                //commit mutation to CART_WEIGHT
+                commit('CART_WEIGHT', response.data.total)
+            })
+        },
+
+        removeCart({commit}, cart_id){
+            //get data token & user
+            const token = localStorage.getItem('token');
+
+            //set axios dengan headers type Authorization + Bearer token
+            Api.defaults.headers.common['Authorization'] = "Bearer " + token;
+
+            //send remove request to server API
+            Api.post('/cart/remove-item', {
+                cart_id: cart_id
+            })
+            .then(() => {
+                //get data carts
+                Api.get('/carts')
+                .then(response => {
+                    commit('GET_CART', response.data.carts)
+                })
+
+                //get data total cart
+                Api.get('/cart/total-price')
+                .then(response => {
+                    commit('TOTAL_CART', response.data.total)
+                })
+
+                //get total weight
+                Api.get('/cart/total-weight')
+                .then(response => {
+                    //commit mutation to CART_WEIGHT
+                    commit('CART_WEIGHT', response.data.total)
+                })
+            })
         }
     },
     //getters
@@ -69,6 +152,10 @@ const cart = {
         //count cart
         cartCount(state){
             return state.cart.length
+        },
+        //cart total price
+        cartTotal(state){
+            return state.cartTotal
         }
     }
 }
