@@ -320,6 +320,7 @@
                         grandTotal: state.grandTotal
                     }
 
+                    //jalankan action checkout di module store ny cart
                     store.dispatch('cart/checkout', data)
                         .then(response => {
                             //jika berhasil arahkan ke detail order dengan snap_token midtrans
@@ -338,9 +339,11 @@
                 //check validasi name, phone, address
                 if(!state.name){
                     validation.name = true
-                }else if(!state.phone){
+                }
+                if(!state.phone){
                     validation.phone = true
-                }else if(!state.address){
+                }
+                if(!state.address){
                     validation.address = true
                 }
             }

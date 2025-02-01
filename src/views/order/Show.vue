@@ -33,7 +33,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    {{ detailOrder.phone }}
+                                    0{{ detailOrder.phone }}
                                 </td>
                             </tr>
                             <tr>
@@ -43,7 +43,7 @@
                                 <td>:</td>
                                 <td>
                                     {{ detailOrder.courier }} / {{ detailOrder.service }} / Rp.
-                                    {{ detailOrder.cost_courier  }}
+                                    {{ moneyFormat(detailOrder.cost_courier)  }}
                                 </td>
                             </tr>
                             <tr>
@@ -61,7 +61,7 @@
                                 </td>
                                 <td>:</td>
                                 <td>
-                                    Rp. {{ detailOrder.grand_total  }}
+                                    Rp. {{ moneyFormat(detailOrder.grand_total)  }}
                                 </td>
                             </tr>
                             <tr>
