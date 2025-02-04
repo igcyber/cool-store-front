@@ -13,14 +13,6 @@
                 <router-link :to="{ name: 'category' }" class="nav-item nav-link" :class="{ active: isCategoryActive }" >Kategori</router-link>
                 
                 <router-link :to="{ name: 'product' }" class="nav-item nav-link" :class="{active: isProductActive }">Produk </router-link>
-
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Transaksi</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                        <a href="cart.html" class="dropdown-item">Keranjang Belanja</a>
-                        <a href="checkout.html" class="dropdown-item">Checkout</a>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
