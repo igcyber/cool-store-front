@@ -159,13 +159,16 @@
 <script>
     import { onMounted, computed, reactive } from 'vue';
     import {useStore} from 'vuex';
-    import {routerKey, useRouter} from 'vue-router';
+    import {useRouter} from 'vue-router';
     import Api from '../../api/Api';
     export default{
         name: 'CartComponent',
         setup(){
             //store vuex
             const store = useStore()
+
+            //vue router
+            const router = useRouter();
 
             //mounted cart
             onMounted(() => {
